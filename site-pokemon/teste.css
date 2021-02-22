@@ -1,0 +1,19 @@
+.nomeDaClasse{
+border: solid 4px blue;
+
+}
+
+.bordaVerde{
+border: solid 4px green;
+margin:20px 30px 40px 50px;
+padding:20px 30px 40px 50px;
+}
+
+.bordaAzul{
+border: solid 4px blue
+}
+
+.bordaTracejada{
+border:dashed 4px red
+
+}

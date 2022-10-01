@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Employee</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <p th:text="${pokemonName}" />
+    <p th:text="${pokemon.id}" />
+    <tbody>
+    <tr th:each="move : ${pokemon.moves}">
+        <td><span th:text="${move.move.name}"> Title </span></td>
+    </tr>
+    </tbody>
+    <img th:src="${pokemon.sprites.other.dream_world.front_default}" />
+
+    <img th:src="${pokemon.sprites.other.dream_world.front_default}" />
+    <img th:src="${pokemon.sprites.other.dream_world.front_female}" />
+    <img th:src="${pokemon.sprites.other.home.front_default}" />
+    <img th:src="${pokemon.sprites.other.home.front_female}" />
+    <img th:src="${pokemon.sprites.other.home.front_shiny}" />
+    <img th:src="${pokemon.sprites.other.home.front_shiny_female}" />
+
+
+
+
+    </table>
+    <ul>
+        <il>
+            <img th:src="${pokemon.sprites.back_default}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.back_female}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.back_shiny}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.back_shiny_female}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.front_default}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.front_female}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.front_shiny}" />
+        </il>
+        <il>
+            <img th:src="${pokemon.sprites.front_shiny_female}" />
+        </il>
+    </ul>
+    </table>
+</div>
+</body>
+</html>

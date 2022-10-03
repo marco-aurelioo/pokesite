@@ -1,9 +1,11 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
 @Table(name="heartgoldSoulsilver")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class HeartgoldSoulsilver(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

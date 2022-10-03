@@ -1,4 +1,4 @@
-package com.pokemon.resources
+package com.pokemon.SpiderModel.resources
 
 class RestClientPokeAPI {
 

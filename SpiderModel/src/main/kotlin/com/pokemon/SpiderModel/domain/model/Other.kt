@@ -1,18 +1,22 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import javax.persistence.*
 
 @Entity
 @Table(name="other")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Other(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
+    @ManyToOne(cascade= arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name="dream_word_id")
     val dream_world: DreamWorld,
+    @ManyToOne(cascade= arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name="home_id")
     val home: Home,
+    @ManyToOne(cascade= arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name="officialartwork_id")
     val officialArtwork: OfficialArtwork
 )

@@ -1,13 +1,11 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import javax.persistence.*
 
 @Entity
 @Table(name="sprites")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Sprites(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +18,10 @@ data class Sprites(
     val front_female: String?,
     val front_shiny: String?,
     val front_shiny_female: String?,
+    @ManyToOne(cascade= arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name="other_id")
     val other: Other,
+    @ManyToOne(cascade= arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name="version_id")
     val versions: Versions
 )

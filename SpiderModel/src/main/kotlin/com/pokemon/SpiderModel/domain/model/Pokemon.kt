@@ -1,11 +1,14 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.Fetch
 import org.hibernate.annotations.FetchMode
 import javax.persistence.*
+import javax.persistence.CascadeType.PERSIST
 
 @Entity
 @Table(name="pokemon")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Pokemon(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +33,19 @@ data class Pokemon(
     @OneToMany(targetEntity= Type::class, mappedBy="pokemon", fetch=FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     val types: List<Type>,
-
     val base_experience: Int,
     val height: Int,
     val id: Int,
     val is_default: Boolean,
     val location_area_encounters: String,
     val name: String,
+    @Column(name="ordem")
     val order: Int,
+    @ManyToOne(cascade= arrayOf(PERSIST))
+    @JoinColumn(name="species_id")
     val species: Species,
+    @ManyToOne(cascade= arrayOf(PERSIST))
+    @JoinColumn(name="sprites_id")
     val sprites: Sprites,
     val weight: Int
 )

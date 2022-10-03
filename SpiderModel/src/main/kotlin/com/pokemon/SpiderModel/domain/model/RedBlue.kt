@@ -1,5 +1,6 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -8,6 +9,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name="red_blue")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class RedBlue(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

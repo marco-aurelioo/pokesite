@@ -1,18 +1,19 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
-import com.pokemon.SpiderModel.domain.model.Pokemon
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
 @Table(name = "ability")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Ability (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val isHidden: Boolean,
     val slot: Int,
-    @Embedded
-    val ability: NameUrlModel,
+    val name: String?,
+    val url: String?,
     @ManyToOne
     @JoinColumn(name="pokemon_id")
     val pokemon: Pokemon

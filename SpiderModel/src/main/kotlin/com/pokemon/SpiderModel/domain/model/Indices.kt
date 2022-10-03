@@ -1,17 +1,18 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
-import com.pokemon.SpiderModel.domain.model.Pokemon
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
 @Table(name="indices")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Indices(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val gameIndex: Int,
-    @Embedded
-    val indices: NameUrlModel,
+    val name: String?,
+    val url: String?,
     @ManyToOne
     @JoinColumn(name="pokemon_id")
     val pokemon: Pokemon

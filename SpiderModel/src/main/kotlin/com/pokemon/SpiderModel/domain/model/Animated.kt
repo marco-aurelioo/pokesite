@@ -1,9 +1,11 @@
-package com.pokemon.SpiderModel.model
+package com.pokemon.SpiderModel.domain.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
 @Table(name="animated")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Animated(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

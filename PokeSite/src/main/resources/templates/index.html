@@ -2,14 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Employee</title>
+    <title>Home </title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <style >
+
+
+        .footer {
+           background-image: linear-gradient(to bottom right, white, black);
+           color: white;
+        }
+
+        .header {
+           background-color: #000;
+           color: white;
+        }
+
+    </style>
 </head>
 <body>
-<div class="container my-2" align="center">
+<div class="container">
+<div class="siteContext" >
+    <div class="row" >
+        <div class="col header">
+            header
+        </div>
+    </div>
+    <div class="row bg-secondary text-white ">
+        <ul class="list-unstyled"  >
+            <li class="media border border-dark" th:each="pokemonItem : ${listPokemon}">
+                <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1" th:text="${pokemonItem.pokemonName}">Nome</h5>
+                    <div class="bg-dark text-white" th:each="move : ${pokemonItem.moves}" th:text="${move.name}">d-inline</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="row" align="center">
+        <div class="col footer" >
+            Footer
+        </div>
+    </div>
 
     <tbody>
     <tr th:each="pokemonItem : ${listPokemon}">
@@ -18,10 +54,8 @@
     </tr>
     </tbody>
 
-
-    </table>
-
-    </table>
 </div>
+</div>
+
 </body>
 </html>

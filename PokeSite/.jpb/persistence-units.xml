@@ -4,7 +4,7 @@
     <persistence-units>
       <persistence-unit name="Default">
         <packages>
-          <package value="com.pokesite.site.PokeSite" />
+          <package value="com.pokesite.site.pokesite" />
         </packages>
       </persistence-unit>
     </persistence-units>

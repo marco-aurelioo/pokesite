@@ -6,7 +6,7 @@ data class Pokemon(
     val forms: List<com.pokesite.site.pokesite.resources.api.model.Form>?,
     val game_indices: List<com.pokesite.site.pokesite.resources.api.model.GameIndice>?,
     val height: Int?,
-    val held_items: List<String?>?,
+    val held_items: List<HeldItem?>?,
     val id: Int,
     val is_default: Boolean?,
     val location_area_encounters: String?,

@@ -1,6 +1,7 @@
 package com.pokesite.site.pokesite.resources.api.extensions
 
 import com.pokesite.site.pokesite.domain.model.PokemonModel
+import com.pokesite.site.pokesite.resources.api.model.Pokemon
 
 class PokemonApiExtensions {
 }
@@ -12,6 +13,16 @@ fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): Pokem
         pokemonName = this.name,
         moves = null
     )
+}
+
+fun Pokemon.toPokemonModel(): PokemonModel {
+    return PokemonModel(
+        id = this.id,
+        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.id}.png",
+        pokemonName = this.name,
+        moves = null
+    )
+
 }
 
 fun String.extractUrlId(): Int {

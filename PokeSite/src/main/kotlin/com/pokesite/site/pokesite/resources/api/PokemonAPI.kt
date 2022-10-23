@@ -14,18 +14,18 @@ class PokemonAPI {
 
     var mapper = ObjectMapper()
 
-    fun getPokemon(): Pokemon {
-        val restTemplate = RestTemplate()
-        val response = restTemplate.getForEntity<Pokemon>("https://pokeapi.co/api/v2/pokemon/1/")
-        return response.body!!
-    }
-
     fun findPokemonList(): List<PokemonModel> {
         val restTemplate = RestTemplate()
         val response = restTemplate.getForEntity<com.pokesite.site.pokesite.resources.api.model.PokemonPage>("https://pokeapi.co/api/v2/pokemon")
         return response.body!!.results!!.stream().map {
             it.toPokemonItem()
         }.toList()
+    }
+
+    fun getPokemonById(pokemonId: Int): Pokemon {
+        val restTemplate = RestTemplate()
+        val response = restTemplate.getForEntity<Pokemon>("https://pokeapi.co/api/v2/pokemon/$pokemonId/")
+        return response.body!!
     }
 
 }

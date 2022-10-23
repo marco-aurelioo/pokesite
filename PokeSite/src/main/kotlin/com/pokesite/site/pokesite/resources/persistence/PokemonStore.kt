@@ -10,14 +10,15 @@ import org.springframework.stereotype.Component
 class PokemonStore {
 
     val dataBase: MutableMap<Int, PokemonModel> = mutableMapOf()
-
+    val dataBasePokemon: MutableMap<Int, Pokemon> = mutableMapOf()
+    val dataBasePokemonName: MutableMap<String, Pokemon> = mutableMapOf()
     fun finPokemonModelList(ids: List<PokemonModel>): List<PokemonModel> {
         var listReturn : MutableList<PokemonModel> = mutableListOf()
         ids.stream().forEach{ model ->
             dataBase.get(model.id)?.let {
                 listReturn.add(it)
             } ?: run {
-                listReturn.add(model)
+                listReturn.add(model.copy(pokemonName = "Novo"))
             }
         }
         return listReturn.toList()
@@ -31,7 +32,8 @@ class PokemonStore {
             pokemonImg = pokemon.sprites!!.front_default,
             moves = getMoves(pokemon.moves!!)
         ))
-
+        dataBasePokemon.put(pokemon.id, pokemon)
+        dataBasePokemonName.put(pokemon.name!!,pokemon)
     }
 
     private fun getMoves(moves: List<Move>): List<MoveModel>? {
@@ -43,6 +45,14 @@ class PokemonStore {
                 active = false ))
         }
         return moveList.toList()
+    }
+
+    fun findByPokemonId(pokemonId: Int): Pokemon? {
+        return dataBasePokemon.get(pokemonId)
+    }
+
+    fun findByName(name: String): Pokemon? {
+        return dataBasePokemonName.get(name)
     }
 
 }

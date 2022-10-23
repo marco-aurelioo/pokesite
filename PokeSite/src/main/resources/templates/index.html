@@ -33,10 +33,15 @@
     <div class="row bg-secondary text-white ">
         <ul class="list-unstyled"  >
             <li class="media border border-dark" th:each="pokemonItem : ${listPokemon}">
-                <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}" th:alt="${pokemonItem.pokemonName}" >
+                    <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                </a>
+                <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}" th:alt="${pokemonItem.pokemonName}" >
+                    <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                </a>
                 <div class="media-body">
                     <h5 class="mt-0 mb-1" th:text="${pokemonItem.pokemonName}">Nome</h5>
-                    <div class="bg-dark text-white" th:each="move : ${pokemonItem.moves}" th:text="${move.name}">d-inline</div>
+                    <span class="badge badge-info" th:each="move : ${pokemonItem.moves}" th:text="${move.name}">d-inline</span>
                 </div>
             </li>
         </ul>
@@ -47,12 +52,6 @@
         </div>
     </div>
 
-    <tbody>
-    <tr th:each="pokemonItem : ${listPokemon}">
-        <td><span th:text="${pokemonItem.pokemonName}"> Title </span></td>
-        <td><img th:src="${pokemonItem.pokemonImg}" /></td>
-    </tr>
-    </tbody>
 
 </div>
 </div>

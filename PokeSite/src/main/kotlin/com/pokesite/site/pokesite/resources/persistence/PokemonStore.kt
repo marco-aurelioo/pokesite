@@ -29,7 +29,7 @@ class PokemonStore {
         PokemonModel(
             id = pokemon.id,
             pokemonName = pokemon.name,
-            pokemonImg = pokemon.sprites!!.front_default,
+            pokemonImg = pokemon.sprites!!.other!!.official_artwork!!.front_default,
             moves = getMoves(pokemon.moves!!)
         ))
         dataBasePokemon.put(pokemon.id, pokemon)

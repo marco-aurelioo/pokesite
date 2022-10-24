@@ -25,23 +25,24 @@
 <body>
 <div class="container">
 <div class="siteContext" >
-    <div class="row" >
-        <div class="col header">
-            header
-        </div>
+    <div class="row bg-secondary text-white">
+        <h1 class="text-center">
+            Pokesite.
+        </h1>
     </div>
     <div class="row bg-secondary text-white ">
         <ul class="list-unstyled"  >
-            <li class="media border border-dark" th:each="pokemonItem : ${listPokemon}">
+            <li class="media border border-dark m-2" th:each="pokemonItem : ${listPokemon}">
                 <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}" th:alt="${pokemonItem.pokemonName}" >
-                    <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                    <img class="m-4 rounded-circle bg-light" width="200" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
                 </a>
                 <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}" th:alt="${pokemonItem.pokemonName}" >
-                    <img class="mr-3 rounded-circle bg-light" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                    <img class="m-4 rounded-circle bg-light" width="200" th:src="${pokemonItem.pokemonImg}"
+                         th:alt="${pokemonItem.pokemonName}" />
                 </a>
                 <div class="media-body">
-                    <h5 class="mt-0 mb-1" th:text="${pokemonItem.pokemonName}">Nome</h5>
-                    <span class="badge badge-info" th:each="move : ${pokemonItem.moves}" th:text="${move.name}">d-inline</span>
+                    <h5 class="m-2" th:text="${pokemonItem.pokemonName}">Nome</h5>
+                    <span class="badge badge-info m-1" th:each="move : ${pokemonItem.moves}" th:text="${move.name}">d-inline</span>
                 </div>
             </li>
         </ul>

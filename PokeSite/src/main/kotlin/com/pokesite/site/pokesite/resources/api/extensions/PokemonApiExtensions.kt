@@ -9,7 +9,7 @@ class PokemonApiExtensions {
 fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): PokemonModel {
     return PokemonModel(
         id = this.url.extractUrlId(),
-        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.url.extractUrlId()}.png",
+        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.url.extractUrlId()}.svg",
         pokemonName = this.name,
         moves = null
     )
@@ -18,7 +18,7 @@ fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): Pokem
 fun Pokemon.toPokemonModel(): PokemonModel {
     return PokemonModel(
         id = this.id,
-        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.id}.png",
+        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.id}.svg",
         pokemonName = this.name,
         moves = null
     )

@@ -1,6 +1,5 @@
 package com.pokesite.site.pokesite.controller
 
-import com.pokesite.site.pokesite.domain.exception.RedirectRequestException
 import com.pokesite.site.pokesite.domain.service.PokemonService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -16,11 +15,9 @@ class PokemonController(var pokemonService: PokemonService) {
         @PathVariable("pokemon") pokemonName: String,
         model: Model
     ): String{
-        model.addAllAttributes(
-            mapOf(
-                "pokemonName" to pokemonName,
-                "pokemon" to pokemonService.findPokemonByName(pokemonName)))
-
+        if(pokemonName.equals("favicon.ico"))
+            return "blank"
+        model.addAttribute("pokemon" , pokemonService.findPokemonByName(pokemonName))
         return "pokemon"
     }
 

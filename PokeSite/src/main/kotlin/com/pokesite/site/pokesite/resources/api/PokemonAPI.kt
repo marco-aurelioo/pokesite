@@ -12,11 +12,11 @@ import org.springframework.web.client.getForEntity
 @Component
 class PokemonAPI {
 
-    var mapper = ObjectMapper()
+    var limit = 30
 
-    fun findPokemonList(): List<PokemonModel> {
+    fun findPokemonList(page: Int): List<PokemonModel> {
         val restTemplate = RestTemplate()
-        val response = restTemplate.getForEntity<com.pokesite.site.pokesite.resources.api.model.PokemonPage>("https://pokeapi.co/api/v2/pokemon")
+        val response = restTemplate.getForEntity<com.pokesite.site.pokesite.resources.api.model.PokemonPage>("https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=${limit*page}")
         return response.body!!.results!!.stream().map {
             it.toPokemonItem()
         }.toList()

@@ -8,55 +8,30 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 </head>
-<body>
-<div class="container my-2" align="center">
-    <p th:text="${pokemonName}" />
-    <p th:text="${pokemon.id}" />
-    <tbody>
-    <tr th:each="move : ${pokemon.moves}">
-        <td><span th:text="${move.move.name}"> Title </span></td>
-    </tr>
-    </tbody>
-    <img th:src="${pokemon.sprites.other.dream_world.front_default}" />
+<body class="d-flex flex-column" >
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light text-white bg-dark justify-content-center">
+        <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
+             width="30" height="30"
+             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="">
+        <h1 class="float-right" >PokeSite</h1>
+    </nav>
+    <!-- Navbar -->
+</header>
+<main  class="text-white bg-secondary" >
 
-    <img th:src="${pokemon.sprites.other.dream_world.front_default}" />
-    <img th:src="${pokemon.sprites.other.dream_world.front_female}" />
-    <img th:src="${pokemon.sprites.other.home.front_default}" />
-    <img th:src="${pokemon.sprites.other.home.front_female}" />
-    <img th:src="${pokemon.sprites.other.home.front_shiny}" />
-    <img th:src="${pokemon.sprites.other.home.front_shiny_female}" />
+    <p th:text="${pokemon.pokemonName}" />
+    <img th:src="${pokemon.pokemonImg}" />
 
-
-
-
-    </table>
-    <ul>
-        <il>
-            <img th:src="${pokemon.sprites.back_default}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.back_female}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.back_shiny}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.back_shiny_female}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.front_default}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.front_female}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.front_shiny}" />
-        </il>
-        <il>
-            <img th:src="${pokemon.sprites.front_shiny_female}" />
-        </il>
-    </ul>
-    </table>
-</div>
+</main>
+<footer>
+    <nav class="navbar navbar-light text-white bg-dark justify-content-center">
+         <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
+             width="30" height="30"
+             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="">
+        <h1 class="float-right" >PokeSite</h1>
+    </nav>
+</footer>
 </body>
 </html>

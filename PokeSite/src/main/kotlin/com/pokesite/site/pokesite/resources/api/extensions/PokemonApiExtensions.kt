@@ -1,9 +1,12 @@
 package com.pokesite.site.pokesite.resources.api.extensions
 
 import com.pokesite.site.pokesite.domain.model.PokemonModel
+import com.pokesite.site.pokesite.domain.model.PokemonTypeModel
 import com.pokesite.site.pokesite.resources.api.model.Pokemon
 import com.pokesite.site.pokesite.resources.api.model.Stat
+import com.pokesite.site.pokesite.resources.api.model.Type
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonEntity
+import com.pokesite.site.pokesite.resources.persistence.entity.PokemonType
 
 class PokemonApiExtensions
 
@@ -20,7 +23,8 @@ fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): Pokem
         defense = null,
         specialAttack = null,
         specialDefense = null,
-        speed = null
+        speed = null,
+        types = null
     )
 }
 
@@ -37,7 +41,8 @@ fun Pokemon.toPokemonModel(): PokemonModel {
         defense = getStats("defense", this.stats),
         specialAttack = getStats("special-attack", this.stats),
         specialDefense = getStats("special-defense", this.stats),
-        speed = getStats("speed", this.stats)
+        speed = getStats("speed", this.stats),
+        types = this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList()
     )
 }
 
@@ -53,8 +58,21 @@ fun Pokemon.toEntity(): PokemonEntity = PokemonEntity(
     defense = getStats("defense", this.stats),
     specialAttack = getStats("special-attack", this.stats),
     specialDefense = getStats("special-defense", this.stats),
-    speed = getStats("speed", this.stats)
+    speed = getStats("speed", this.stats),
+    types = getTypes(this.types)
 )
+
+fun getTypes(types: List<Type>?): List<PokemonType>? {
+    return types?.stream()?.map {
+        var idType = extractTypeId(it.type!!.url!!)
+        var typeName = it.type.name
+        PokemonType(idType,typeName!!)
+    }?.toList()
+}
+
+fun extractTypeId(url: String): Int {
+    return url.replace(Regex("https://pokeapi.co/api/v2/type/(\\d+)/"),"$1").toInt()
+}
 
 fun PokemonEntity.toPokemonModel(): PokemonModel = PokemonModel(
     id =  this.externalId,
@@ -68,7 +86,8 @@ fun PokemonEntity.toPokemonModel(): PokemonModel = PokemonModel(
     specialDefense = this.specialDefense,
     specialAttack = this.specialAttack,
     moves = null,
-    speed = this.speed
+    speed = this.speed,
+    types = this.types?.stream()?.map { PokemonTypeModel(it.id,it.typeName) }?.toList()
 )
 
 fun getStats(statsName: String, stats: List<Stat>?): Int? {

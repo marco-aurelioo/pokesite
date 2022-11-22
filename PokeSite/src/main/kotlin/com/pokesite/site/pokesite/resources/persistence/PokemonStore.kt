@@ -8,10 +8,13 @@ import com.pokesite.site.pokesite.resources.api.model.Move
 import com.pokesite.site.pokesite.resources.api.model.Pokemon
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonEntity
 import com.pokesite.site.pokesite.resources.persistence.repository.PokemonRepository
+import com.pokesite.site.pokesite.resources.persistence.repository.PokemonTypeRepository
 import org.springframework.stereotype.Component
 
 @Component
-class PokemonStore(val repository: PokemonRepository) {
+class PokemonStore(
+    val repository: PokemonRepository,
+    val pokemonTypeRepository: PokemonTypeRepository) {
 
      fun finPokemonModelList(ids: List<PokemonModel>): List<PokemonModel> {
         var listReturn : MutableList<PokemonModel> = mutableListOf()
@@ -26,7 +29,11 @@ class PokemonStore(val repository: PokemonRepository) {
     }
 
     fun savePokemonModel(pokemon: Pokemon){
-       repository.save(pokemon.toEntity())
+       val pokemonEntity = pokemon.toEntity()
+        pokemonEntity.types?.let {
+            pokemonTypeRepository.saveAll(pokemonEntity.types)
+        }
+        repository.save(pokemonEntity)
     }
 
     fun findByPokemonId(pokemonId: Int): PokemonEntity? {

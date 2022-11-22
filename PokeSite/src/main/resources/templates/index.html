@@ -25,7 +25,7 @@
     <nav class="navbar navbar-light text-white bg-dark justify-content-center">
         <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
              width="30" height="30"
-             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="">
+             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="PokeSite">
         <h1 class="float-right" >PokeSite</h1>
     </nav>
     <!-- Navbar -->
@@ -37,10 +37,14 @@
                 <div class="media mt-2 ml-2 p-2 bg-dark">
                     <div class="media-img my-auto">
                         <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}" th:alt="${pokemonItem.pokemonName}" >
-                            <img class="mr-3 rounded-circle bg-light  my-auto" th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                            <img class="mr-3 rounded-circle bg-light  my-auto"
+                                 width="93", height="93"
+                                 th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
                         </a>
                         <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}" th:alt="${pokemonItem.pokemonName}" >
-                            <img class="mr-3 rounded-circle bg-light  " th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                            <img class="mr-3 rounded-circle bg-light  "
+                                 width="93", height="93"
+                                 th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
                         </a>
                     </div>
                     <div class="media-body mb-2">

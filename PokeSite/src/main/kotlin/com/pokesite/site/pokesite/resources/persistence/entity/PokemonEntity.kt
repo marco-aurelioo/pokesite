@@ -24,4 +24,7 @@ data class PokemonEntity (
         name = "pokemon_pokemon_type",
         joinColumns = [JoinColumn(name = "pokemon_id")],
         inverseJoinColumns = [JoinColumn(name = "pokemon_type_id")])
-    val types: List<PokemonType>?)
+    val types: List<PokemonType>?,
+    @OneToOne( cascade = [CascadeType.ALL])
+    val pokemonImgs: PokemonImgs?
+    )

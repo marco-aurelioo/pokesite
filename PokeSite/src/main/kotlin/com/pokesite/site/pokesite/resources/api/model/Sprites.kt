@@ -9,6 +9,6 @@ data class Sprites(
     val front_female: String?,
     val front_shiny: String?,
     val front_shiny_female: String?,
-    val other: com.pokesite.site.pokesite.resources.api.model.Other?,
-    val versions: com.pokesite.site.pokesite.resources.api.model.Versions?
+    val other: Other?,
+    val versions: Versions?
 )

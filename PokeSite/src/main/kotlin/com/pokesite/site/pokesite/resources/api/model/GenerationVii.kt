@@ -1,6 +1,9 @@
 package com.pokesite.site.pokesite.resources.api.model
 
+import com.fasterxml.jackson.annotation.JsonAlias
+
 data class GenerationVii(
-    val icons: com.pokesite.site.pokesite.resources.api.model.Icons?,
-    val ultraSunUltraMoon: com.pokesite.site.pokesite.resources.api.model.UltraSunUltraMoon?
+    val icons: Icons?,
+    @JsonAlias("ultra-sun-ultra-moon")
+    val ultraSunUltraMoon: UltraSunUltraMoon?
 )

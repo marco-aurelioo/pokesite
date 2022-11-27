@@ -1,5 +1,8 @@
 package com.pokesite.site.pokesite.resources.api.model
 
+import com.fasterxml.jackson.annotation.JsonAlias
+
 data class GenerationV(
-    val blackWhite: com.pokesite.site.pokesite.resources.api.model.BlackWhite?
+    @JsonAlias("black-white")
+    val blackWhite: BlackWhite?
 )

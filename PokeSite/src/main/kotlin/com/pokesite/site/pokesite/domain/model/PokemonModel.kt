@@ -12,5 +12,6 @@ data class PokemonModel(
     val specialAttack: Int?,
     val specialDefense: Int?,
     val speed: Int?,
-    val types: List<PokemonTypeModel>?
+    val types: List<PokemonTypeModel>?,
+    val imgs: List<String?>?
 )

@@ -9,10 +9,11 @@ import com.pokesite.site.pokesite.resources.api.model.Type
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonEntity
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonImgs
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonType
+import com.pokesite.site.pokesite.resources.api.model.Result
 
 class PokemonApiExtensions
 
-fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): PokemonModel {
+fun Result.toPokemonItem(): PokemonModel {
     return PokemonModel(
         id = this.url.extractUrlId(),
         pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.url.extractUrlId()}.svg",
@@ -26,7 +27,8 @@ fun com.pokesite.site.pokesite.resources.api.model.Result.toPokemonItem(): Pokem
         specialAttack = null,
         specialDefense = null,
         speed = null,
-        types = null
+        types = null,
+        imgs = null
     )
 }
 
@@ -44,7 +46,8 @@ fun Pokemon.toPokemonModel(): PokemonModel {
         specialAttack = getStats("special-attack", this.stats),
         specialDefense = getStats("special-defense", this.stats),
         speed = getStats("speed", this.stats),
-        types = this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList()
+        types = this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList(),
+        imgs = null
     )
 }
 
@@ -207,8 +210,57 @@ fun PokemonEntity.toPokemonModel(): PokemonModel = PokemonModel(
     specialAttack = this.specialAttack,
     moves = null,
     speed = this.speed,
-    types = this.types?.stream()?.map { PokemonTypeModel(it.id,it.typeName) }?.toList()
+    types = this.types?.stream()?.map { PokemonTypeModel(it.id,it.typeName) }?.toList(),
+    imgs = getImgs(this.pokemonImgs)
 )
+
+fun getImgs(pokemonImgs: PokemonImgs?): List<String?>?{
+    return pokemonImgs.let {
+        listOf(
+            it?.front_default,
+            it?.front_female,
+            it?.front_shiny,
+            it?.front_shiny_female,
+            it?.back_gray_front_default,
+            it?.back_gray_front_gray,
+            it?.back_gray_front_default,
+            it?.back_gray_front_transparent,
+            it?.black_white_animated_front_default,
+            it?.black_white_animated_front_female,
+            it?.black_white_animated_front_shiny,
+            it?.black_white_animated_front_shiny_female,
+            it?.crystal_front_default,
+            it?.crystal_front_shiny,
+            it?.crystal_front_transparent,
+            it?.crystal_front_shiny_transparent,
+            it?.diamond_pearl_front_default,
+            it?.diamond_pearl_front_female,
+            it?.diamond_pearl_front_shiny,
+            it?.diamond_pearl_front_shiny_female,
+            it?.dream_world_front_default,
+            it?.dream_world_front_female,
+            it?.emerald_front_default,
+            it?.emerald_front_shiny,
+            it?.firered_leafgreen_front_default,
+            it?.firered_leafgreen_front_shiny,
+            it?.generation_vii_icons_front_default,
+            it?.generation_vii_icons_front_female,
+            it?.gold_front_default,
+            it?.gold_front_shiny,
+            it?.heartgold_soulsilver_front_default,
+            it?.heartgold_soulsilver_front_female,
+            it?.heartgold_soulsilver_front_shiny,
+            it?.heartgold_soulsilver_front_shiny_female,
+            it?.home_front_default,
+            it?.home_front_female,
+            it?.home_front_shiny,
+            it?.platinum_front_female,
+            it?.platinum_front_default,
+            it?.platinum_front_shiny,
+            it?.platinum_front_shiny_female
+        )
+    }
+}
 
 fun getStats(statsName: String, stats: List<Stat>?): Int? {
     stats?.let { st ->

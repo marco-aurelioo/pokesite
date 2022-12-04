@@ -58,19 +58,19 @@
                         <div>
                             VELOCIDADE:
                             <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" th:style="@{'width: '+${pokemonItem.speed}+'%'}" th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-info" role="progressbar" th:style="@{'width: '+${pokemonItem.speed}+'%'}" th:aria-valuenow="${pokemonItem.speed}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div>
                             ATAQUE:
                             <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" th:style="@{'width: '+${pokemonItem.attack}+'%'}" th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" th:style="@{'width: '+${pokemonItem.attack}+'%'}" th:aria-valuenow="${pokemonItem.attack}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div >
                             DEFESE:
                             <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" th:style="@{'width: '+${pokemonItem.defense}+'%'}" th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" th:style="@{'width: '+${pokemonItem.defense}+'%'}" th:aria-valuenow="${pokemonItem.defense}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>

@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Home </title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
     <style>
         .rotate_image {
-            -webkit-transform: rotate(180deg);
-            -moz-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-            -o-transform: rotate(180deg);
             transform: rotate(180deg);
         }
-
-
     </style>
 </head>
-<body class="d-flex flex-column" >
+<body class="d-flex flex-column">
 <header>
     <!-- Navbar -->
     <nav class="navbar navbar-light text-white bg-dark justify-content-center">
         <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
              width="30" height="30"
              class="d-inline-block align-top rounded-circle bg-light mr-3" alt="PokeSite">
-        <h1 class="float-right" >PokeSite</h1>
+        <h1 class="float-right">PokeSite</h1>
     </nav>
     <!-- Navbar -->
 </header>
-<main  class="text-white bg-secondary" >
+<main class="text-white bg-secondary">
     <div class="container">
-        <div class="row" >
-            <div class="col-sm-12 col-md-6 col-lg-4 " th:each="pokemonItem : ${listPokemon}">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4" th:each="pokemonItem : ${listPokemon}">
                 <div class="media mt-2 ml-2 p-2 bg-dark">
                     <div class="media-img my-auto">
-                        <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}" th:alt="${pokemonItem.pokemonName}" >
-                            <img class="mr-3 rounded-circle bg-light  my-auto"
-                                 width="93", height="93"
+                        <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}"
+                           th:alt="${pokemonItem.pokemonName}">
+                            <img class="mr-3 rounded-circle bg-light my-auto"
+                                 width="93" height="93"
                                  th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
                         </a>
-                        <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}" th:alt="${pokemonItem.pokemonName}" >
-                            <img class="mr-3 rounded-circle bg-light  "
-                                 width="93", height="93"
+                        <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}"
+                           th:alt="${pokemonItem.pokemonName}">
+                            <img class="mr-3 rounded-circle bg-light"
+                                 width="93" height="93"
                                  th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
                         </a>
                     </div>
@@ -52,25 +48,33 @@
                         <div>
                             HP:
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" th:style="@{'width: '+${pokemonItem.hp}+'%'}" th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success"
+                                     th:style="'width: ' + ${pokemonItem.hp} + '%'"
+                                     th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div>
                             VELOCIDADE:
                             <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" th:style="@{'width: '+${pokemonItem.speed}+'%'}" th:aria-valuenow="${pokemonItem.speed}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-info"
+                                     th:style="'width: ' + ${pokemonItem.speed} + '%'"
+                                     th:aria-valuenow="${pokemonItem.speed}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div>
                             ATAQUE:
                             <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" th:style="@{'width: '+${pokemonItem.attack}+'%'}" th:aria-valuenow="${pokemonItem.attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger"
+                                     th:style="'width: ' + ${pokemonItem.attack} + '%'"
+                                     th:aria-valuenow="${pokemonItem.attack}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                        <div >
+                        <div>
                             DEFESE:
                             <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" th:style="@{'width: '+${pokemonItem.defense}+'%'}" th:aria-valuenow="${pokemonItem.defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning"
+                                     th:style="'width: ' + ${pokemonItem.defense} + '%'"
+                                     th:aria-valuenow="${pokemonItem.defense}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -81,16 +85,16 @@
 </main>
 <footer>
     <nav class="navbar navbar-light text-white bg-dark justify-content-center">
-        <a  th:href="@{'/?page='+${previousPage}}" >
+        <a th:href="@{'/?page=' + ${previousPage}}">
             <img class="rotate_image"
-                 src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36"/>
+                 src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36" alt="Previous Page"/>
         </a>
         <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
              width="30" height="30"
-             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="">
-        <h1 class="float-right" >PokeSite</h1>
-        <a  th:href="@{'/?page='+${nextPage}}" >
-            <img src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36"/>
+             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="Pokeball">
+        <h1 class="float-right">PokeSite</h1>
+        <a th:href="@{'/?page=' + ${nextPage}}">
+            <img src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36" alt="Next Page"/>
         </a>
     </nav>
 </footer>

@@ -36,8 +36,8 @@ class PokemonStore(
         repository.save(pokemonEntity)
     }
 
-    fun findByPokemonId(pokemonId: Int): PokemonEntity? {
-        return repository.findByExternalId(pokemonId)
+    fun findByPokemonId(pokemonId: Int): PokemonModel? {
+        return repository.findByExternalId(pokemonId)?.toPokemonModel()
     }
 
     fun findByName(name: String): PokemonModel? {

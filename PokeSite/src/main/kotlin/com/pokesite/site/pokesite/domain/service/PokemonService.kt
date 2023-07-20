@@ -22,7 +22,7 @@ class PokemonService(
 
     fun findPokemonById(pokemonId: Int): PokemonModel {
         pokemonStore.findByPokemonId(pokemonId)?.let{
-                return it.toPokemonModel()
+                return it
         } ?: run {
            val pokemon = pokemonAPI.getPokemonById(pokemonId)
             pokemonStore.savePokemonModel(pokemon)

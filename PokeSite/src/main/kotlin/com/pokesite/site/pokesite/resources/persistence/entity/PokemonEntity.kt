@@ -26,5 +26,11 @@ data class PokemonEntity (
         inverseJoinColumns = [JoinColumn(name = "pokemon_type_id")])
     val types: List<PokemonType>?,
     @OneToOne( cascade = [CascadeType.ALL])
-    val pokemonImgs: PokemonImgs?
+    val pokemonImgs: PokemonImgs?,
+    @ManyToMany
+    @JoinTable(
+        name = "pokemon_moves",
+        joinColumns = [JoinColumn(name = "pokemon_id")],
+        inverseJoinColumns = [JoinColumn(name = "move_id")]
     )
+    val moves: List<PokemonMoveEntity>? )

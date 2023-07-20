@@ -47,7 +47,7 @@ fun Pokemon.toPokemonModel(): PokemonModel {
         specialDefense = getStats("special-defense", this.stats),
         speed = getStats("speed", this.stats),
         types = this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList(),
-        imgs = null
+        imgs = getImgs( getImgs(this.id,this.sprites) )
     )
 }
 
@@ -65,7 +65,8 @@ fun Pokemon.toEntity(): PokemonEntity = PokemonEntity(
     specialDefense = getStats("special-defense", this.stats),
     speed = getStats("speed", this.stats),
     types = getTypes(this.types),
-    pokemonImgs = getImgs(this.id,this.sprites)
+    pokemonImgs = getImgs(this.id,this.sprites),
+    moves = null
 )
 
 fun getImgs(id: Int, sprites: Sprites?): PokemonImgs? =

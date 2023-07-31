@@ -37,14 +37,14 @@ class SecurityConfig : WebSecurityConfigurerAdapter()  {
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         var bpcrypt = BCryptPasswordEncoder()
-        var exemplo = bpcrypt.encode("1234567")
-        System.out.println("Exemplo!!!: $exemplo")
         return bpcrypt
     }
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
-            .antMatchers("/users/**", "/games/**").authenticated()
+            .antMatchers("/static/**").permitAll()
+            .antMatchers("/users/**", "/games/**")
+            .authenticated()
             .anyRequest().permitAll()
             .and()
             .formLogin()

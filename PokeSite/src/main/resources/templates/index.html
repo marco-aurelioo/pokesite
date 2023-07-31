@@ -1,102 +1,228 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-    <style>
-        .rotate_image {
-            transform: rotate(180deg);
+<style>
+    body{
+        background-color: #f0f0d8;
+        padding: 0;
+        font-family: sans-serif;
+    }
+    .header-menu{
+        background-color:  #607848;
+        border: 1px solid black;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .card{
+        background-color: #607848;
+        border: 1px solid black;
+    }
+    .footer-menu {
+
+    }
+
+    .arrow {
+        --arrow-size: 1em;
+        --arrow-color: rgb(255,255,255);
+        --arrow-color-hover: rgba(255,255,255,0.5);
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+        width: var(--arrow-size);
+        height: var(--arrow-size);
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            box-sizing: border-box;
+            display: inline-block;
+            width: calc( var(--arrow-size) * .7071);
+            height: calc( var(--arrow-size) * .7071);
+            border-top: calc( var(--arrow-size) / 5 ) solid var(--arrow-color);
+            transition: all 150ms ease-in-out;
         }
-    </style>
+
+        &.left {
+            &::after {
+                left: calc( var(--arrow-size) / 5 );
+                border-left: calc( var(--arrow-size) / 5 ) solid var(--arrow-color);
+                transform-origin: top left;
+                rotate: -45deg;
+            }
+
+            &:hover::after {
+                box-shadow: calc( var(--arrow-size) / -8 ) calc( var(--arrow-size) / -8 ) 0 var(--arrow-color);
+            }
+        }
+
+        &.right {
+            &::after {
+                right: calc( var(--arrow-size) / 5 );
+                border-right: calc( var(--arrow-size) / 5 ) solid var(--arrow-color);
+                transform-origin: top right;
+                rotate: 45deg;
+            }
+
+            &:hover::after {
+                box-shadow: calc( var(--arrow-size) / 8 ) calc( var(--arrow-size) / -8 ) 0 var(--arrow-color);
+            }
+        }
+    }
+
+    a {
+        &:hover .arrow {
+            &.left,
+            &.right {
+                &::after {
+                    border-color: var(--arrow-color-hover);
+                }
+            }
+
+            &.left {
+                &::after {
+                    box-shadow: calc( var(--arrow-size) / -8 ) calc( var(--arrow-size) / -8 ) 0 var(--arrow-color);
+                }
+            }
+
+            &.right {
+                &::after {
+                    box-shadow: calc( var(--arrow-size) / 8 ) calc( var(--arrow-size) / -8 ) 0 var(--arrow-color);
+                }
+            }
+        }
+    }
+.color1 { #607848 };
+.color2 { #789048 };
+.color3 { #c0d860 };
+.color4 { #f0f0d8 };
+.color5 { #604848 };
+</style>
 </head>
-<body class="d-flex flex-column">
+<body>
 <header>
-    <!-- Navbar -->
-    <nav class="navbar navbar-light text-white bg-dark justify-content-center">
-        <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
-             width="30" height="30"
-             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="PokeSite">
-        <h1 class="float-right">PokeSite</h1>
-    </nav>
-    <!-- Navbar -->
+    <div  style=" height: 250px; background-color: #607848; border-radius: 20px; padding: 10px;border-left: 10px solid #d37719;border-right: 10px solid #d37719;" >
+        <div style="display: flex; flex-direction: row; justify-content: space-between; align-content: center;">
+            <div style="background-color: #789048;border-radius: 50%;">
+                <img th:src="${listPokemon[0].pokemonImg}" style="max-width: 200px;"/>
+            </div>
+            <div>
+                <h1 style="font-weight: 400; font-family: fantasy; text-shadow: 2px 2px #000000; color:#d37719;font-size: 60px;" >PokeSite.</h1>
+            </div>
+            <div style="background-color: #789048;border-radius: 50%;">
+                <img th:src="${listPokemon[#lists.size(listPokemon)-1].pokemonImg}" style="max-width: 200px" />
+            </div>
+        </div>
+    </div>
 </header>
-<main class="text-white bg-secondary">
+<content>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-4" th:each="pokemonItem : ${listPokemon}">
-                <div class="media mt-2 ml-2 p-2 bg-dark">
-                    <div class="media-img my-auto">
-                        <a th:if="${pokemonItem.pokemonName != 'Novo'}" th:href="${pokemonItem.pokemonName}"
-                           th:alt="${pokemonItem.pokemonName}">
-                            <img class="mr-3 rounded-circle bg-light my-auto"
-                                 width="93" height="93"
-                                 th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+        <div style="display: flex; flex-direction: row; justify-content: center;"  >
+            <div id="publicidadeContainer" style="display: flex;flex-flow: row wrap; flex-direction: row; padding: 10px;"   >
+                <div id="publicidade" style="display: flex; flex-direction: row; padding: 10px;"   th:each="publicidade : ${publicidadeList}" >
+                    <div style="display: flex; flex-direction: column;" >
+                        <a th:href="${publicidade.link}">
+                            <img th:src="${publicidade.img}" style="max-width: 200px; padding: 5px;">
                         </a>
-                        <a th:if="${pokemonItem.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItem.id}}"
-                           th:alt="${pokemonItem.pokemonName}">
-                            <img class="mr-3 rounded-circle bg-light"
-                                 width="93" height="93"
-                                 th:src="${pokemonItem.pokemonImg}" th:alt="${pokemonItem.pokemonName}">
+                        <a th:href="${publicidade.link}">
+                            <img th:src="${publicidade.afiliado}" style="width: 75px; height: 35px; padding: 5px;">
                         </a>
                     </div>
-                    <div class="media-body mb-2">
-                        <h2 class="pt-2" th:text="${pokemonItem.pokemonName}">Pontos de vida:</h2>
-                        <div>
-                            HP:
-                            <div class="progress">
-                                <div class="progress-bar bg-success"
-                                     th:style="'width: ' + ${pokemonItem.hp} + '%'"
-                                     th:aria-valuenow="${pokemonItem.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div style="display: flex; flex-direction: row;">
+                        <a th:href="${publicidade.link}" style="text-decoration: none;">
+                            <h1 th:text="${publicidade.product}" style="color:#af2f22;font-size: 20px;margin-left: 15px;width:300px;"></h1>
+                            <h1 th:text="${publicidade.preco}"   style="color:#060cb5;margin-left: 15px;width:300px;" ></h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  style="display:flex; flex-direction: row; align-items: center; justify-content: center; background-color: #607848; border-radius: 20px; padding: 10px;border-left: 10px solid #d37719;border-right: 10px solid #d37719;" >
+            <div>
+                <a th:href="@{'/?page=' + ${previousPage}}" style="text-decoration: none;color: white;" ><span class="arrow left"></span> Anterior</a>
+            </div>
+            <div style="padding: 10px">&nbsp;</div>
+            <div>
+                <a th:href="@{'/?page=' + ${nextPage}}"    style="text-decoration: none;color: white;"  >Proximo<span class="arrow right"></span></a>
+            </div>
+        </div>
+        <div class="cards" >
+            <div style="display:flex; flex-direction: row; flex-flow: row wrap; justify-content: center; width: 100%;"  >
+                <div style="display:flex; flex-direction: column; background-color: #607848;border-left: 15px solid #d37719; border-radius: 20px; padding: 10px; margin:10px; width: 450px" th:each="pokemonItemCard : ${listPokemon}" >
+                    <div class="card_new">
+                        <div style="display:flex; flex-direction: row; flex-flow: row wrap;"  >
+                            <div style="display:flex; flex-direction: column;width:100px;">
+                                <h1 th:text="${pokemonItemCard.pokemonName}" style="margin-left:15px;font-size: 25px; font-weight: bold;color: #324905" >Pokemon</h1>
+                                <a th:if="${pokemonItemCard.pokemonName != 'Novo'}" th:href="${pokemonItemCard.pokemonName}"
+                                   th:alt="${pokemonItemCard.pokemonName}">
+                                    <div style="width: 93px; height: 93px; background-color: #789048; border-radius: 50%;margin-left: 15px;">
+                                        <img style="width: 93px; height: 93px; "
+                                             th:src="${pokemonItemCard.pokemonImg}" th:alt="${pokemonItemCard.pokemonName}">
+                                    </div>
+                                </a>
+                                <a th:if="${pokemonItemCard.pokemonName == 'Novo'}" th:href="@{'/new/'+${pokemonItemCard.id}}"
+                                   th:alt="${pokemonItemCard.pokemonName}">
+                                    <div style="width: 93px; height: 93px; background-color: #789048; border-radius: 50%;margin-left: 15px;">
+                                        <img style="width: 93px; height: 93px;"
+                                             width="93" height="93"
+                                             th:src="${pokemonItemCard.pokemonImg}" th:alt="${pokemonItemCard.pokemonName}">
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                        <div>
-                            VELOCIDADE:
-                            <div class="progress">
-                                <div class="progress-bar bg-info"
-                                     th:style="'width: ' + ${pokemonItem.speed} + '%'"
-                                     th:aria-valuenow="${pokemonItem.speed}" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div>
-                            ATAQUE:
-                            <div class="progress">
-                                <div class="progress-bar bg-danger"
-                                     th:style="'width: ' + ${pokemonItem.attack} + '%'"
-                                     th:aria-valuenow="${pokemonItem.attack}" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div>
-                            DEFESE:
-                            <div class="progress">
-                                <div class="progress-bar bg-warning"
-                                     th:style="'width: ' + ${pokemonItem.defense} + '%'"
-                                     th:aria-valuenow="${pokemonItem.defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div style="display:flex; flex-direction: column; padding: 10px">
+                                <div style="height: 24px;"></div>
+                                <div style="display:flex; flex-direction: row; justify-content: space-between; padding: 10px;margin-right: 15px;">
+                                    <h1 style="color:#324905;font-size: 13px; font-weight: bold;">HP:</h1>
+                                    <div th:if="${pokemonItemCard.hp > 0}" style="width:  200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'background-color:#cfcf35; height:24px;border-radius: 10px;width:' + ${pokemonItemCard.hp} + '%'"></div>
+                                    </div>
+                                    <div th:if="${pokemonItemCard.hp == null}" style="width:  200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'font-size: 13px;text-align: center; vertical-align: middle; background-color:#cfbaba; height:24px; border-radius: 10px;width:100%'"></div>
+                                    </div>
+                                </div>
+                                <div style="display:flex; flex-direction: row; justify-content: space-between; padding: 10px;margin-right: 15px;">
+                                    <h1 style="color:#324905;font-size: 13px; font-weight: bold;">Defense:</h1>
+                                    <div th:if="${pokemonItemCard.defense > 0}" style="width:  200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'background-color:#41bd41; height:24px;border-radius: 10px;width:' + ${pokemonItemCard.defense} + '%'"></div>
+                                    </div>
+                                    <div th:if="${pokemonItemCard.defense == null}" style="width:  200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'font-size: 13px;text-align: center; vertical-align: middle; background-color:#cfbaba; height:24px; border-radius: 10px;width:100%'"></div>
+                                    </div>
+                                </div>
+                                <div style="display:flex; flex-direction: row; justify-content: space-between; padding: 10px;margin-right: 15px;">
+                                    <h1 style="color:#324905;font-size: 13px; font-weight: bold;">Attack:</h1>
+                                    <div th:if="${pokemonItemCard.attack > 0}" style="width: 200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'background-color:#c33a3a; height:24px;border-radius: 10px;width:' + ${pokemonItemCard.attack} + '%'"></div>
+                                    </div>
+                                    <div th:if="${pokemonItemCard.attack == null}" style="width:  200px; background-color: #FFFFFF;height:24px;border-radius: 10px;margin-left: 15px;">
+                                        <div th:style="'font-size: 13px;text-align: center; vertical-align: middle; background-color:#cfbaba; height:24px; border-radius: 10px;width:100%'"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div  style="display:flex; flex-direction: row; align-items: center; justify-content: center; background-color: #607848; border-radius: 20px; padding: 10px;border-left: 10px solid #d37719;border-right: 10px solid #d37719;" >
+            <div>
+                <a th:href="@{'/?page=' + ${previousPage}}" style="text-decoration: none;color: white;" ><span class="arrow left"></span> Anterior</a>
+            </div>
+            <div style="padding: 10px">&nbsp;</div>
+            <div>
+                <a th:href="@{'/?page=' + ${nextPage}}"    style="text-decoration: none;color: white;"  >Proximo<span class="arrow right"></span></a>
+            </div>
+        </div>
     </div>
-</main>
+</content>
 <footer>
-    <nav class="navbar navbar-light text-white bg-dark justify-content-center">
-        <a th:href="@{'/?page=' + ${previousPage}}">
-            <img class="rotate_image"
-                 src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36" alt="Previous Page"/>
-        </a>
-        <img src="https://www.pngfind.com/pngs/m/158-1587026_pokeball-clipart-pokemon-symbol-free-pokeball-svg-hd.png"
-             width="30" height="30"
-             class="d-inline-block align-top rounded-circle bg-light mr-3" alt="Pokeball">
-        <h1 class="float-right">PokeSite</h1>
-        <a th:href="@{'/?page=' + ${nextPage}}">
-            <img src="https://thypix.com/wp-content/uploads/2020/04/white-arrow-5-700x368.png" width="80" height="36" alt="Next Page"/>
-        </a>
-    </nav>
+    <div  style="display:flex; flex-direction: row; align-items: center; height: 250px; justify-content: center; background-color: #607848; border-radius: 20px; padding: 10px;border-left: 10px solid #d37719;border-right: 10px solid #d37719;" >
+
+    </div>
 </footer>
 </body>
 </html>

@@ -10,13 +10,14 @@ import com.pokesite.site.pokesite.resources.persistence.entity.PokemonEntity
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonImgs
 import com.pokesite.site.pokesite.resources.persistence.entity.PokemonType
 import com.pokesite.site.pokesite.resources.api.model.Result
+import org.springframework.util.StringUtils
 
 class PokemonApiExtensions
 
 fun Result.toPokemonItem(): PokemonModel {
     return PokemonModel(
         id = this.url.extractUrlId(),
-        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.url.extractUrlId()}.svg",
+        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.url.extractUrlId()}.png",
         pokemonName = this.name,
         moves = null,
         hp = null,
@@ -35,8 +36,8 @@ fun Result.toPokemonItem(): PokemonModel {
 fun Pokemon.toPokemonModel(): PokemonModel {
     return PokemonModel(
         id = this.id,
-        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.id}.svg",
-        pokemonName = this.name,
+        pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.id}.png",
+        pokemonName = this.name?.let { StringUtils.capitalize(it) },
         moves = this.moves?.let { it.size }.run { null },
         hp = getStats("hp", this.stats),
         height = this.height,
@@ -46,7 +47,7 @@ fun Pokemon.toPokemonModel(): PokemonModel {
         specialAttack = getStats("special-attack", this.stats),
         specialDefense = getStats("special-defense", this.stats),
         speed = getStats("speed", this.stats),
-        types = this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList(),
+        types = null,//this.types?.stream()?.map { PokemonTypeModel(extractTypeId(it.type!!.url!!),it.type!!.name!!) }?.toList(),
         imgs = getImgs( getImgs(this.id,this.sprites) )
     )
 }
@@ -54,8 +55,8 @@ fun Pokemon.toPokemonModel(): PokemonModel {
 fun Pokemon.toEntity(): PokemonEntity = PokemonEntity(
     id = null,
     externalId = this.id,
-    pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.id}.png",
-    pokemonName = this.name!!,
+    pokemonImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.id}.png",
+    pokemonName = StringUtils.capitalize(this.name!!),
     hp = getStats("hp", this.stats),
     height = this.height!!,
     weight = this.weight!!,
@@ -211,7 +212,7 @@ fun PokemonEntity.toPokemonModel(): PokemonModel = PokemonModel(
     specialAttack = this.specialAttack,
     moves = null,
     speed = this.speed,
-    types = this.types?.stream()?.map { PokemonTypeModel(it.id,it.typeName) }?.toList(),
+    types = null,//this.types?.stream()?.map { PokemonTypeModel(it.id,it.typeName) }?.toList(),
     imgs = getImgs(this.pokemonImgs)
 )
 

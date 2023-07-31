@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  db:
+  db_2:
     image: postgres:latest
     restart: always
     environment:
@@ -9,7 +9,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - db:/var/lib/postgresql/data
+      - db_2:/var/lib/postgresql/data
 volumes:
-  db:
+  db_2:
     driver: local

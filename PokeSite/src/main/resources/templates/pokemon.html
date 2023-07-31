@@ -55,7 +55,7 @@
 </header>
 <content>
     <div class="container">
-        <div style="display: flex; flex-direction: row; justify-content: center;"  >
+        <div style="display: flex; flex-direction: row; justify-content: center; align-content: center;"  >
             <div id="publicidadeContainer" style="display: flex;flex-flow: row wrap; flex-direction: row; padding: 10px;"   >
                 <div id="publicidade" style="display: flex; flex-direction: row; padding: 10px;"   th:each="publicidade : ${publicidadeList}" >
                     <div style="display: flex; flex-direction: column;" >
@@ -77,7 +77,7 @@
         </div>
         <div class="caracteristicas" >
 
-            <div style="display:flex; flex-direction: column; flex-flow: row wrap; align-items: flex-start; justify-content: center; width: 100%;"  >
+            <div style="display:flex; flex-direction: column; flex-flow: row wrap; align-items: flex-start; width: 100%; justify-content: center;"  >
 
                 <div style="display:flex; flex-direction: row; flex-flow: column wrap; justify-content: center; width: 50%; aling-items: top;"  >
                     <div style="display:flex; flex-direction: column; align-items: center; background-color: #607848; border-left: 15px solid #d37719; border-radius: 20px; padding: 10px; margin:10px; "  >
@@ -86,7 +86,7 @@
                              th:text="${pokemon.pokemonName}" ></h1>
                         </div>
                         <div style="background-color: #789048;border-radius: 50%;">
-                            <img style="max-width: 500px;" th:src="${pokemon.pokemonImg}" th:alt="${pokemon.pokemonName}">
+                            <img style="max-width: 450px;" th:src="${pokemon.pokemonImg}" th:alt="${pokemon.pokemonName}">
                         </div>
                     </div>
 
